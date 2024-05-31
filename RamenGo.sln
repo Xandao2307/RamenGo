@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RamenGo.Api", "RamenGo.Api\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RamenGo.Infrastructure", "RamenGo.Infrastructure\RamenGo.Infrastructure.csproj", "{31C3E269-5BC8-497D-ACD1-40B443C25825}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RamenGo.Services", "RamenGo.Services\RamenGo.Services.csproj", "{6A825429-ACF0-42A1-B1B3-63700732A831}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RamenGo.Communication", "RamenGo.Communication\RamenGo.Communication.csproj", "{2B9E3454-BDD4-436C-BED0-5B1BE26279A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{31C3E269-5BC8-497D-ACD1-40B443C25825}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31C3E269-5BC8-497D-ACD1-40B443C25825}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31C3E269-5BC8-497D-ACD1-40B443C25825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A825429-ACF0-42A1-B1B3-63700732A831}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A825429-ACF0-42A1-B1B3-63700732A831}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A825429-ACF0-42A1-B1B3-63700732A831}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A825429-ACF0-42A1-B1B3-63700732A831}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B9E3454-BDD4-436C-BED0-5B1BE26279A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B9E3454-BDD4-436C-BED0-5B1BE26279A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B9E3454-BDD4-436C-BED0-5B1BE26279A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B9E3454-BDD4-436C-BED0-5B1BE26279A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
