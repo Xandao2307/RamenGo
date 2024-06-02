@@ -8,6 +8,6 @@ namespace RamenGo.Communication.Responses
 {
     public class ErrorResponse
     {
-        public string ErrorMenssage { get; set; }
+        public string Error { get; set; }
     }
 }
