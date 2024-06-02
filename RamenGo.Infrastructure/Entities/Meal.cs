@@ -17,6 +17,6 @@ namespace RamenGo.Infrastructure.Entities
         public Broth Broth { get; set; }
         public Protein Protein { get; set; }
 
-        public List<Order> Orders { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }
