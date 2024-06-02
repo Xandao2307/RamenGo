@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using RamenGo.Communication.Requests;
 using RamenGo.Communication.Responses;
 using RamenGo.Infrastructure.DbContexts;
+using RamenGo.Services.Order.Exceptions;
 using RamenGo.Infrastructure.Entities;
 using System;
 using System.Collections.Generic;
@@ -18,17 +19,24 @@ namespace RamenGo.Services.Order
     {
         private RamenGoDbContext _dbContext { get; set; }
         private readonly IConfiguration _configuration;
-        public OrderService(RamenGoDbContext dbContext, IConfiguration configuration)
+        private DbInitialiazer _initialiazer { get; set; }
+        public OrderService(RamenGoDbContext dbContext, IConfiguration configuration, DbInitialiazer initialiazer)
         {
             _dbContext = dbContext;
             _configuration = configuration;
+            _initialiazer = initialiazer;
+            _initialiazer.InitiateAsync().Wait();
         }
 
         public async Task<OrderResponse> CreateOrderAsync(OrderRequest request)
         {
+            if (_dbContext == null)
+                throw new OrderException("could not place order");
+
+            var meal = _dbContext.Meals.FirstOrDefault(m => m.ProteinId == request.ProteinId && m.BrothId == request.BrothId)
+                ?? throw new InvalidBrothAndProteinException("both brothId or proteinId is invalid");
             var orderId = await GetOrderIdAsync();
 
-            var meal = _dbContext.Meals.FirstOrDefault(m => m.ProteinId == request.ProteinId && m.BrothId == request.BrothId);
             var order = new Infrastructure.Entities.Order() { Id = int.Parse(orderId), Meal = meal, MealId = meal.Id };
             _dbContext.Orders.Add(order);
             await _dbContext.SaveChangesAsync();

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RamenGo.Communication.Requests;
 using RamenGo.Communication.Responses;
 using RamenGo.Services.Order;
+using RamenGo.Services.Order.Exceptions;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 
@@ -23,10 +24,10 @@ namespace RamenGo.Api.Controllers
             _xApiKey = _configuration.GetSection("x-api-key").Value;
         }
 
-        /// <response code="200">Retorna a mensagem de sucesso</response>
-        /// <response code="403">Retorna caso o x-api-key venha vázio ou inválido</response>
-        [ProducesResponseType(typeof(OrderResponse),StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(ErrorResponse),StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(OrderResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public async Task<IActionResult> CreateOrderAsync([Required][FromBody] OrderRequest request, [Required][FromHeader(Name = "x-api-key")] string apiKey)
         {
@@ -36,8 +37,20 @@ namespace RamenGo.Api.Controllers
             if (apiKey != _xApiKey)
                 return StatusCode(403, new ErrorResponse { Error = "invalid x-api-key header" });
 
-            await _orderService.CreateOrderAsync(request);
-            return Ok();
+            try
+            {
+               var responseOrder =  await _orderService.CreateOrderAsync(request);
+                return Created("",responseOrder);
+            }
+            catch (InvalidBrothAndProteinException e)
+            {
+                return BadRequest(new ErrorResponse { Error = e.Message });
+            }
+            catch(Exception e) 
+            {
+                return StatusCode(500, new ErrorResponse { Error = e.Message });
+            }
+
         }
     }
 }
