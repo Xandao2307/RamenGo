@@ -13,16 +13,18 @@ namespace RamenGo.Services.Broth
     public class BrothService
     {
         private RamenGoDbContext _dbContext { get; set; }
-
-        public BrothService(RamenGoDbContext dbContext)
+        private DbInitialiazer _initialiazer { get; set; }
+        public BrothService(RamenGoDbContext dbContext, DbInitialiazer initialiazer)
         {
             _dbContext = dbContext;
+            _initialiazer = initialiazer;
+            _initialiazer.InitiateAsync().Wait();
         }
 
         public async Task<List<BrothResponse>> GetAllAsync()
         {
             var listBroth = new List<BrothResponse>();
-            if (_dbContext != null) throw new BrothException("Error in Database");
+            if (_dbContext == null) throw new BrothException("Error in Database");
 
             foreach (var broth in _dbContext.Broths)
                 listBroth.Add(new BrothResponse()

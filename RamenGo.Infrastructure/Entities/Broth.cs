@@ -14,6 +14,6 @@ namespace RamenGo.Infrastructure.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
-        public List<Meal> Meals { get; set; }
+        public ICollection<Meal> Meals { get; set; }
     }
 }
