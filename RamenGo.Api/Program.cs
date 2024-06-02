@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using RamenGo.Api.Controllers;
 using RamenGo.Infrastructure.DbContexts;
+using RamenGo.Services.Order;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<RamenGoDbContext>(opt => opt.UseInMemoryDatabase("RamenGo"));
-
+builder.Services.AddScoped<OrderService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
