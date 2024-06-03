@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Este projeto é uma API para a aplicação web **RamenGo**, desenvolvida com **C# .NET 8**. A API permite que os usuários montem pedidos de ramen, selecionando tipos de caldos e proteínas. A API oferece endpoints para listar as opções disponíveis e um endpoint para processar e confirmar o pedido do usuário.
+Este projeto é uma API para a aplicação web **RamenGo**, desenvolvida com **C# .NET 8 DDD Clean Architecture**. A API permite que os usuários montem pedidos de ramen, selecionando tipos de caldos e proteínas. A API oferece endpoints para listar as opções disponíveis e um endpoint para processar e confirmar o pedido do usuário.
 
 ## Funcionalidades
 
